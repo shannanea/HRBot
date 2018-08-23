@@ -63,12 +63,20 @@ bot.dialog('GreetingDialog',
     matches: 'Greeting'
 })
 
-bot.dialog('ApplyLeave',
-    (session) => {
-        session.send('yo yo yo', session.message.text);
+bot.dialog('ApplyLeave', [
+    function (session, args, next) {
+        session.send(args);
+        session.endDialog();
+    },
+    function (session, args, next) {
+        session.send(args);
+        session.endDialog();
+    },
+    function (session, results) {
+        session.send(results);
         session.endDialog();
     }
-).triggerAction({
+]).triggerAction({
     matches: 'Help'
 })
 
