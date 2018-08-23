@@ -63,21 +63,13 @@ bot.dialog('GreetingDialog',
     matches: 'Greeting'
 })
 
-bot.dialog('ApplyLeave', [
-    function (session, args, next) {
-        console.log(args);
-        session.send(args);
-        session.endDialog();
-    },
-    function (session, args, next) {
-        session.send(args);
-        session.endDialog();
-    },
-    function (session, results) {
-        session.send(results);
+bot.dialog('ApplyLeave',
+    (session) => {
+        console.log('dsvdsvsjv');
+        session.send('yo yo yo', session.message.text);
         session.endDialog();
     }
-]).triggerAction({
+).triggerAction({
     matches: 'Help'
 })
 
