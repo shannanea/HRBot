@@ -65,6 +65,7 @@ bot.dialog('GreetingDialog',
 
 bot.dialog('ApplyLeave', [
     function (session, args, next) {
+        console.log(args);
         session.send(args);
         session.endDialog();
     },
