@@ -63,9 +63,9 @@ bot.dialog('GreetingDialog',
     matches: 'Greeting'
 })
 
-bot.dialog('HelpDialog',
+bot.dialog('ApplyLeave',
     (session) => {
-        session.send('You reached the Help intent. You said \'%s\'.', session.message.text);
+        session.send('yo yo yo', session.message.text);
         session.endDialog();
     }
 ).triggerAction({
