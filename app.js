@@ -54,14 +54,7 @@ bot.recognizer(recognizer);
 
 // Add a dialog for each intent that the LUIS app recognizes.
 // See https://docs.microsoft.com/en-us/bot-framework/nodejs/bot-builder-nodejs-recognize-intent-luis 
-bot.dialog('GreetingDialog',
-    (session) => {
-        session.send('You reached the Greeting intent. You said \'%s\'.', session.message.text);
-        session.endDialog();
-    }
-).triggerAction({
-    matches: 'Greeting'
-})
+
 
 bot.dialog('ApplyLeave',
     (session, args) => {
@@ -73,12 +66,5 @@ bot.dialog('ApplyLeave',
     matches: 'ApplyLeave'
 })
 
-bot.dialog('CancelDialog',
-    (session) => {
-        session.send('You reached the Cancel intent. You said \'%s\'.', session.message.text);
-        session.endDialog();
-    }
-).triggerAction({
-    matches: 'Cancel'
-})
+
 
