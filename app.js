@@ -64,8 +64,8 @@ bot.dialog('GreetingDialog',
 })
 
 bot.dialog('ApplyLeave',
-    (session) => {
-        console.log('dsvdsvsjv');
+    (session, args) => {
+        console.log(args);
         session.send('yo yo yo', session.message.text);
         session.endDialog();
     }
