@@ -70,7 +70,7 @@ bot.dialog('ApplyLeave',
         session.endDialog();
     }
 ).triggerAction({
-    matches: 'Help'
+    matches: 'ApplyLeave'
 })
 
 bot.dialog('CancelDialog',
