@@ -60,25 +60,41 @@ bot.dialog('ApplyLeave', [
     function (session, args, next) {
         var intent = args.intent;
         var leaveTypeEntity = builder.EntityRecognizer.findEntity(intent.entities, 'LeaveType');
+        var dateRangeEntity = builder.EntityRecognizer.findEntity(intent.entities, 'datetimeV2');
         if (leaveTypeEntity) {
             leaveApplication.type=leaveTypeEntity.entity;
-            //console.log(leaveTypeEntity.entity);
+            if (dateRangeEntity) {
+                leaveApplication.period=dateRangeEntity.entity;
+            }
             next();
         } else {
             //console.log('no foubd');
             //builder.Prompts.text(session, "What type of leave do you wish to apply?");
-            builder.Prompts.text(session, 'What type of leave do you want to apply');
+            builder.Prompts.text(session, 'What type of leave do you want to apply?');
             
         }
         
     },
     function (session, results, next)
     {
-
-        console.log('2nd',results);
+        if (results.response) {
+            leaveApplication.type=results.response;
+        }
+        if (leaveApplication.period) {
+            next();
+        } else {
+            builder.Prompts.confirm(session, "Do you wish to apply for "+leaveApplication.type+" leave today?");
+        }        
     },
     function (session, results) {
-        session.endDialog('Hello ${results.response}!');
+        if (!("response" in results)) {
+
+        } else {
+            if (results.response) {
+                session.endDialog('yES');
+            }
+        }
+        
     }
 ]).triggerAction({
     matches: 'ApplyLeave'
