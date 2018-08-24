@@ -57,8 +57,18 @@ bot.recognizer(recognizer);
 
 
 bot.dialog('ApplyLeave', [
-    function (session) {
-        builder.Prompts.text(session, 'Hi! What is your name?');
+    function (session, args) {
+        var intent = args.intent;
+        var leaveTypeEntity = builder.EntityRecognizer.findEntity(intent.entities, 'LeaveType');
+        if (leaveTypeEntity) {
+            console.log(leaveTypeEntity.entity);
+            builder.Prompts.text(session, 'Hi! What is your name?');
+        } else {
+            console.log('no foubd');
+            builder.Prompts.text(session, "What type of leave do you wish to apply?");
+            session.endDialog();
+        }
+        
     },
     function (session, results) {
         session.endDialog('Hello ${results.response}!');
