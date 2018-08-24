@@ -95,10 +95,10 @@ bot.dialog('ApplyLeave', [
     },
     function (session, results) {
         if (!("response" in results)) {
-
+            session.endDialog('Application for: '+ leaveApplication.type+ 'leave, period: '+leaveApplication.period);
         } else {
             if (results.response) {
-                session.endDialog('yES');
+                session.endDialog('Application for: '+ leaveApplication.type+ 'leave, period: '+leaveApplication.period);
             }
         }
         
