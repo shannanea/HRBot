@@ -54,22 +54,28 @@ bot.recognizer(recognizer);
 
 // Add a dialog for each intent that the LUIS app recognizes.
 // See https://docs.microsoft.com/en-us/bot-framework/nodejs/bot-builder-nodejs-recognize-intent-luis 
-
+var leaveApplication={};
 
 bot.dialog('ApplyLeave', [
     function (session, args, next) {
         var intent = args.intent;
         var leaveTypeEntity = builder.EntityRecognizer.findEntity(intent.entities, 'LeaveType');
         if (leaveTypeEntity) {
-            console.log(leaveTypeEntity.entity);
+            leaveApplication.type=leaveTypeEntity.entity;
+            //console.log(leaveTypeEntity.entity);
             next();
         } else {
             //console.log('no foubd');
             //builder.Prompts.text(session, "What type of leave do you wish to apply?");
-            builder.Prompts.text(session, 'Hi! What is your name?');
+            builder.Prompts.text(session, 'What type of leave do you want to apply');
             
         }
         
+    },
+    function (session, results, next)
+    {
+
+        console.log('2nd',results);
     },
     function (session, results) {
         session.endDialog('Hello ${results.response}!');
