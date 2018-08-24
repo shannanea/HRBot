@@ -61,6 +61,9 @@ bot.dialog('ApplyLeave', [
         var intent = args.intent;
         console.log(intent);
         var leaveTypeEntity = builder.EntityRecognizer.findEntity(intent.entities, 'LeaveType');
+        if (builder.EntityRecognizer.findEntity(intent.entities, 'builtin.datetimeV2.daterange')) {
+            console.log('caught');
+        }
         var dateRangeEntity = builder.EntityRecognizer.findEntity(intent.entities, 'datetimeV2');
         if (leaveTypeEntity) {
             leaveApplication.type=leaveTypeEntity.entity;
