@@ -58,7 +58,7 @@ var leaveApplication={};
 
 bot.dialog('ApplyLeave', [
     function (session, args, next) {
-        var leaveApplication={};
+        
         var intent = args.intent;
         console.log(intent);
         var dateRangeEntity='';
@@ -102,7 +102,7 @@ bot.dialog('ApplyLeave', [
                 session.endDialog('Application for: '+ leaveApplication.type+ 'leave, period: '+leaveApplication.period);
             }
         }
-        
+        leaveApplication={};
     }
 ]).triggerAction({
     matches: 'ApplyLeave'
