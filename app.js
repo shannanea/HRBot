@@ -67,6 +67,7 @@ bot.dialog('ApplyLeave', [
         } else {
             console.log('no foubd');
             builder.Prompts.text(session, "What type of leave do you wish to apply?");
+            session.endDialog();
         }
     },
     (session, results, next) => {
