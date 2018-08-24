@@ -58,7 +58,12 @@ bot.recognizer(recognizer);
 
 bot.dialog('ApplyLeave',
     (session, args) => {
-        console.log(args.intent);
+        // Resolve and store any Note.Title entity passed from LUIS.
+        var intent = args.intent;
+        var title = builder.EntityRecognizer.findEntity(intent.entities, 'LeaveType');
+
+        
+        console.log(title);
         session.send('yo yo yo', session.message.text);
         session.endDialog();
     }
