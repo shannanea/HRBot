@@ -60,11 +60,14 @@ bot.dialog('ApplyLeave', [
     function (session, args, next) {
         var intent = args.intent;
         console.log(intent);
+        var dateRangeEntity='';
         var leaveTypeEntity = builder.EntityRecognizer.findEntity(intent.entities, 'LeaveType');
         if (builder.EntityRecognizer.findEntity(intent.entities, 'builtin.datetimeV2.daterange')) {
-            console.log('caught');
+            dateRangeEntity = builder.EntityRecognizer.findEntity(intent.entities, 'builtin.datetimeV2.daterange');
+        } else if (builder.EntityRecognizer.findEntity(intent.entities, 'builtin.datetimeV2.date')) {
+            dateRangeEntity = builder.EntityRecognizer.findEntity(intent.entities, 'builtin.datetimeV2.date');
         }
-        var dateRangeEntity = builder.EntityRecognizer.findEntity(intent.entities, 'datetimeV2');
+        
         if (leaveTypeEntity) {
             leaveApplication.type=leaveTypeEntity.entity;
             if (dateRangeEntity) {
