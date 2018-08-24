@@ -58,6 +58,7 @@ var leaveApplication={};
 
 bot.dialog('ApplyLeave', [
     function (session, args, next) {
+        var leaveApplication={};
         var intent = args.intent;
         console.log(intent);
         var dateRangeEntity='';
