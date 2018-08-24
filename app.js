@@ -99,6 +99,7 @@ bot.dialog('ApplyLeave', [
             session.endDialog('Application for: '+ leaveApplication.type+ 'leave, period: '+leaveApplication.period);
         } else {
             if (results.response) {
+                leaveApplication.period='today';
                 session.endDialog('Application for: '+ leaveApplication.type+ 'leave, period: '+leaveApplication.period);
             }
         }
