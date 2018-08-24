@@ -57,28 +57,11 @@ bot.recognizer(recognizer);
 
 
 bot.dialog('ApplyLeave', [
-    (session, args, next) => {
-        // Resolve and store any Note.Title entity passed from LUIS.
-        var intent = args.intent;
-        var leaveTypeEntity = builder.EntityRecognizer.findEntity(intent.entities, 'LeaveType');
-        if (leaveTypeEntity) {
-            console.log(leaveTypeEntity.entity);
-            next();
-        } else {
-            console.log('no foubd');
-            builder.Prompts.text(session, "What type of leave do you wish to apply?");
-            session.endDialog();
-        }
-    },
-    (session, results, next) => {
-        if (results.response) {
-            console.log('second ',results);
-            //session.dialogData.profile.name = results.response;
-        }
-        next();
+    function (session) {
+        builder.Prompts.text(session, 'Hi! What is your name?');
     },
     function (session, results) {
-        console.log('end ',results);
+        session.endDialog('Hello ${results.response}!');
     }
 ]).triggerAction({
     matches: 'ApplyLeave'
