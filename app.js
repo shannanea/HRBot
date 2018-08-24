@@ -56,22 +56,30 @@ bot.recognizer(recognizer);
 // See https://docs.microsoft.com/en-us/bot-framework/nodejs/bot-builder-nodejs-recognize-intent-luis 
 
 
-bot.dialog('ApplyLeave',
-    (session, args) => {
+bot.dialog('ApplyLeave', [
+    (session, args, next) => {
         // Resolve and store any Note.Title entity passed from LUIS.
         var intent = args.intent;
         var leaveTypeEntity = builder.EntityRecognizer.findEntity(intent.entities, 'LeaveType');
         if (leaveTypeEntity) {
-
+            console.log(leaveTypeEntity.entity);
+            next();
         } else {
             console.log('no foubd');
+            builder.Prompts.text(session, "What type of leave do you wish to apply?");
         }
-        
-        console.log(title);
-        session.send('yo yo yo', session.message.text);
-        session.endDialog();
+    },
+    (session, results, next) => {
+        if (results.response) {
+            console.log('second ',results);
+            //session.dialogData.profile.name = results.response;
+        }
+        next();
+    },
+    function (session, results) {
+        console.log('end ',results);
     }
-).triggerAction({
+]).triggerAction({
     matches: 'ApplyLeave'
 })
 
